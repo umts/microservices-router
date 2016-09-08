@@ -1,0 +1,12 @@
+default: &default
+  adapter: mysql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: microservices_router_development
+
+test:
+  <<: *default
+  database: microservices_router_test

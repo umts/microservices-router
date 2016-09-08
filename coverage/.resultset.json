@@ -1,0 +1,38 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/molly/microservices-router/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/molly/microservices-router/app/helpers/model_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/molly/microservices-router/app/controllers/model_controller.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/molly/microservices-router/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null
+      ],
+      "/Users/molly/microservices-router/app/models/model.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/molly/microservices-router/app/models/service.rb": [
+        1,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1473356998
+  }
+}
