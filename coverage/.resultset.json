@@ -9,6 +9,16 @@
         1,
         null
       ],
+      "/Users/molly/microservices-router/app/models/model.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/molly/microservices-router/app/models/service.rb": [
+        1,
+        1,
+        null
+      ],
       "/Users/molly/microservices-router/app/controllers/application_controller.rb": [
         0,
         0,
@@ -21,18 +31,8 @@
         0,
         0,
         0
-      ],
-      "/Users/molly/microservices-router/app/models/model.rb": [
-        0,
-        0,
-        0
-      ],
-      "/Users/molly/microservices-router/app/models/service.rb": [
-        0,
-        0,
-        0
       ]
     },
-    "timestamp": 1473355442
+    "timestamp": 1473356577
   }
 }

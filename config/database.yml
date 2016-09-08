@@ -5,8 +5,8 @@ default: &default
 
 development:
   <<: *default
-  database: aggressive_epsilon_development
+  database: microservices_router_development
 
 test:
   <<: *default
-  database: aggressive_epsilon_test
+  database: microservices_router_test
