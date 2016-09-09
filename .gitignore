@@ -19,3 +19,7 @@
 # Ignore most of coverage.
 /coverage/
 !/coverage/.last_run.json
+
+# Ignore database and secret configuration
+/config/database.yml
+/config/secrets.yml
