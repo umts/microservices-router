@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ModelController do
+describe ModelsController do
   describe 'GET #index' do
     it 'is not empty' do
       get :index
