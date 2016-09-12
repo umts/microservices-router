@@ -1,5 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe ModelController, type: :controller do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe ModelController do
+  describe 'GET #index' do
+    it 'is not empty' do
+      get :index
+      expect(response).not_to be_empty
+    end
+  end
 end

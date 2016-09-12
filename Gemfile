@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'factory_girl_rails'
-gem 'mysql'
-gem 'rails'
+gem 'mysql2'
+gem 'rails', '~>5.0'
 
 group :production do
   gem 'exception_notification'
