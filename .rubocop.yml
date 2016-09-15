@@ -1,0 +1,30 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+
+# Don't tell me not to use lower precedence operators.
+Style/AndOr:
+  Enabled: false
+ 
+# Don't worry about documentation for now.
+# In particular, this fails for things like
+# controller files, which seems unnecessary.
+Style/Documentation:
+  Enabled: false
+
+# I just don't understand this one, frankly.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+ 
+# Relax complexity testing to codeclimate standards (roughly).
+Metrics/AbcSize:
+  Max: 20
+Metrics/MethodLength:
+  Max: 20
