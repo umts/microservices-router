@@ -11,10 +11,10 @@ describe ModelsController do
       get :index, format: :json
       body = JSON.parse response.body
       expect(body).to eql [
-        { url: 'https://fruit.example.com', models: [
+        { url: 'https://fruit.example.com/', models: [
            { name: 'Apple' }, { name: 'Banana' } 
         ]}.deep_stringify_keys,
-        { url: 'https://veggies.example.com', models: [
+        { url: 'https://veggies.example.com/', models: [
           { name: 'Carrot' }
         ]}.deep_stringify_keys
       ]
