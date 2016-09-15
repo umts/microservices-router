@@ -7,7 +7,7 @@ describe ModelsController do
     let!(:apple){ create :model, name: 'Apple', service: fruit_service }
     let!(:banana){ create :model, name: 'Banana', service: fruit_service }
     let!(:carrot){ create :model, name: 'Carrot', service: veggie_service }
-    it 'returns a nonempty JSON' do
+    it 'renders a JSON with models and services' do
       get :index, format: :json
       body = JSON.parse response.body
       expect(body).to eql [
