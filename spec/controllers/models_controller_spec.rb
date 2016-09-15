@@ -1,24 +1,21 @@
 require 'rails_helper'
+require 'rspec_api_documentation/dsl'
 
 describe ModelsController do
   describe 'GET #index' do
-    let(:fruit_service) { create :service, url: 'https://fruit.example.com/' }
-    let :veggie_service do
-      create :service, url: 'https://veggies.example.com/'
-    end
-    let!(:apple) { create :model, name: 'Apple', service: fruit_service }
-    let!(:banana) { create :model, name: 'Banana', service: fruit_service }
-    let!(:carrot) { create :model, name: 'Carrot', service: veggie_service }
-    it 'renders a JSON with models and services' do
+    let(:service_1) { create :service }
+    let(:service_2) { create :service }
+    let!(:model_1){ create :model, service: service_1 }
+    let!(:model_2){ create :model, service: service_1 }
+    let!(:model_3){ create :model, service: service_2 }
+    it 'renders JSON with services and their models' do
       get :index, format: :json
       body = JSON.parse response.body
+      body.each(&:deep_symbolize_keys!)
       expect(body).to eql [
-        { url: 'https://fruit.example.com/', models: [
-          { name: 'Apple' }, { name: 'Banana' }
-        ] }.deep_stringify_keys,
-        { url: 'https://veggies.example.com/', models: [
-          { name: 'Carrot' }
-        ] }.deep_stringify_keys
+        { url: service_1.url,
+          models: [ { name: model_1.name }, { name: model_2.name } ] },
+        { url: service_2.url, models: [ { name: model_3.name } ] }
       ]
     end
   end

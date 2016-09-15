@@ -22,6 +22,7 @@ group :development, :test do
   gem 'codeclimate-test-reporter'
   gem 'mocha'
   gem 'pry-byebug'
+  gem 'rspec_api_documentation'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'simplecov'
