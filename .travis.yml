@@ -5,6 +5,7 @@ addons:
     repo_token: 21366a87650e3f3001d54cc22f1ee4338ea7c16f48f1905c957a0ac79a0d5f08
 script:
   - cp config/database.yml.example config/database.yml
+  - cp config/secrets.yml.example config/secrets.yml
   - bundle exec rails db:reset
   - bundle exec rspec
 notifications:
