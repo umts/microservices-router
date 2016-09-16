@@ -100,6 +100,7 @@ GEM
     minitest (5.9.0)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
+    mustache (1.0.3)
     mysql2 (0.4.4)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -168,6 +169,10 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rspec_api_documentation (4.8.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0, >= 3.0.0)
     rubocop (0.37.2)
       parser (>= 2.3.0.4, < 3.0)
       powerpack (~> 0.1)
@@ -223,10 +228,11 @@ DEPENDENCIES
   pry-byebug
   rails (~> 5.0)
   rspec-rails
+  rspec_api_documentation
   rubocop
   simplecov
   timecop
   umts-custom-cops
 
 BUNDLED WITH
-   1.13.0
+   1.13.1
