@@ -7,6 +7,7 @@ resource 'Services' do
       .to change{Service.count}
       .by 1
       body = JSON.parse response_body
+      expect(body).not_to be_empty
     end
   end
 end
