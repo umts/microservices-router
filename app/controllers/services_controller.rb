@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
-  def create
-    @service = Service.new
+  def register
+    @service = Service.create
     render json: @service, include: :models
   end
 end
