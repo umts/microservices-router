@@ -20,6 +20,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'codeclimate-test-reporter'
+  gem 'database_cleaner'
   gem 'mocha'
   gem 'pry-byebug'
   gem 'rspec_api_documentation'

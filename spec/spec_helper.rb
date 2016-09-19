@@ -1,6 +1,7 @@
 require 'codeclimate-test-reporter'
 require 'factory_girl_rails'
 require 'simplecov'
+require 'database_cleaner'
 
 CodeClimate::TestReporter.start if ENV['CI']
 SimpleCov.start 'rails'
@@ -9,8 +10,11 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
+
 RSpec.configure do |config|
   config.before :all do
+    DatabaseCleaner.clean_with :truncation
+    DatabaseCleaner.clean
     FactoryGirl.reload
   end
   config.include FactoryGirl::Syntax::Methods
