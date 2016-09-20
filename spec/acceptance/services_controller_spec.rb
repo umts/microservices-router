@@ -2,22 +2,19 @@ require 'rails_helper'
 
 resource 'Services' do
   post '/services/register' do
-    parameter :service, @service_1
+    let(:service_1) { create :service }
+    let(:model_1) { create :model, service: service_1 }
+    let(:model_2) { create :model, service: service_1 }
     example 'Creating and returning a nested data structure' do
-      expect{do_request}
+      data = {url: service_1.url, models:[{name: model_1.name}, {name: model_2.name}]}
+      expect{do_request(service: data)}
         .to change{Service.count}
         .by 1
       body = JSON.parse response_body
-      expect(body).not_to be_empty
-      #Need to verify returned is a nested data structure
+      body.deep_symbolize_keys!
+      expect(body).to eql data 
     end
     example 'Returns empty if service already exists and has all models registered' do
-      @service_1 = create :service
-      @model_1 = create :model, service: @service_1
-      @model_2 = create :model, service: @service_1
-      do_request
-      body = JSON.parse response_body
-      expect(body).to be_empty
     end
     example 'Returns empty with model name collision' do
     end
