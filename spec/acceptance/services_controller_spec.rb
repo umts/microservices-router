@@ -11,5 +11,14 @@ resource 'Services' do
         .not_to change{ Service.count }
       expect(status).to be status_code(:no_content)
     end
+    example 'Creating and returning a nested data structure' do
+      service_data = { url: 'PiVTrAck.org', models:[{name: 'amazing model' }] }
+      expect { do_request(service_data) }
+        .to change{ Service.count }
+        .by 1
+      body = JSON.parse response_body
+      body.deep_symbolize_keys!
+      expect(body).not_to be_empty
+    end
   end
 end
