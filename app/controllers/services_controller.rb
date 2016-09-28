@@ -4,15 +4,13 @@ class ServicesController < ApplicationController
     params.require(:models).each do |model_data|
       model = Model.find_by name: model_data.require(:name)
       if model.present?
-        if model.service != service
-          head :unprocessable_entity and return
-        end
+        head :unprocessable_entity and return if model.service != service
       else
         Model.create(name: model_data.require(:name), service: service)
       end
     end
     render json: service,
-                only: :url,
-              include: {models: {only: :name}}
+           only: :url,
+           include: { models: { only: :name } }
   end
 end
