@@ -112,6 +112,33 @@ table th, table td {
         <h2>Creating and returning a nested data structure</h2>
         <h3>POST /services/register</h3>
 
+          <h3>Parameters</h3>
+          <table class="parameters table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="required">
+                    <span class="name">url</span>
+                </td>
+                <td>
+                  <span class="description">Unique identifier for services</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">models</span>
+                </td>
+                <td>
+                  <span class="description">Models to be assigned to a specific service</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
 
           <h3>Request</h3>
@@ -137,8 +164,8 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 ETag: W/&quot;005debde76714fdf02c32db6f983afb8&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 6196a744-b566-4627-80e1-5237af30e484
-X-Runtime: 0.026991
+X-Request-Id: b7246088-e415-4d8e-868f-08f9a14947d4
+X-Runtime: 0.012614
 Content-Length: 58</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>

@@ -109,9 +109,36 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Doing nothing if model already exists and has a service</h2>
+        <h2>Returning a nested data structure on previously registered services</h2>
         <h3>POST /services/register</h3>
 
+          <h3>Parameters</h3>
+          <table class="parameters table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="required">
+                    <span class="name">url</span>
+                </td>
+                <td>
+                  <span class="description">Unique identifier for services</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="required">
+                    <span class="name">models</span>
+                </td>
+                <td>
+                  <span class="description">Models to be assigned to a specific service</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
 
           <h3>Request</h3>
@@ -126,7 +153,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">url=UMassTransit.com&models[][name]=3</pre>
+            <pre class="request body">url=1&models[][name]=1&models[][name]=2</pre>
 
 
             <h3>Response</h3>
@@ -134,13 +161,26 @@ Cookie: </pre>
               <pre class="response headers">X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
-Content-Type: text/html
-Cache-Control: no-cache
-X-Request-Id: 8f4e411c-5e53-4a75-8615-20f968ffe4a5
-X-Runtime: 0.007335
-Content-Length: 0</pre>
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;e88a6074d1e01b6999b8f58e8564a4e0&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 53f4d88d-429d-4ea8-9a74-69ea6d168849
+X-Runtime: 0.023480
+Content-Length: 48</pre>
             <h4>Status</h4>
-            <pre class="response status">422 Unprocessable Entity</pre>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">{
+  &quot;url&quot;: &quot;1&quot;,
+  &quot;models&quot;: [
+    {
+      &quot;name&quot;: &quot;1&quot;
+    },
+    {
+      &quot;name&quot;: &quot;2&quot;
+    }
+  ]
+}</pre>
       </div>
     </div>
   </body>
