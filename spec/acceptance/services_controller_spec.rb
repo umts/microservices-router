@@ -6,10 +6,13 @@ resource 'Services' do
     let(:model_1) { create :model, service: service_1 }
     let(:model_2) { create :model, service: service_1 }
     parameter :url, 'Unique identifier for services', required: true
-    parameter :models, 'Models to be assigned to a specific service', required: true
-    example 'Returning a nested data structure on previously registered services' do
+    parameter :models, 'Models assigned to a specific service', required: true
+
+    example 'Returning a nested data structure for registered service' do
+      explanation 'A registered service and its models are returned.'
       service_data = { url: service_1.url,
-                       models: [{ name: model_1.name }, { name: model_2.name }] }
+                       models: [{ name: model_1.name },
+                                { name: model_2.name }] }
       expect { do_request(service_data) }
         .not_to change { Service.count }
       expect(status).to be status_code :ok
@@ -18,6 +21,7 @@ resource 'Services' do
       expect(body).to eql service_data
     end
     example 'Creating and returning a nested data structure' do
+      explanation 'A service and its models are created and returned.'
       service_data = { url: 'PiVTrAck.org',
                        models: [{ name: 'amazing model' }] }
       expect { do_request(service_data) }
@@ -27,7 +31,8 @@ resource 'Services' do
       body.deep_symbolize_keys!
       expect(body).to eql service_data
     end
-    example 'Doing nothing if model exists and has a service' do
+    example 'Doing nothing for a model with a service' do
+      explanation 'A model can only be assigned to one service.'
       service_data = { url: 'UMassTransit.com',
                        models: [{ name: model_1.name }] }
       expect { do_request(service_data) }

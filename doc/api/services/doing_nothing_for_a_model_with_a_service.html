@@ -109,8 +109,11 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Doing nothing if model exists and has a service</h2>
+        <h2>Doing nothing for a model with a service</h2>
         <h3>POST /services/register</h3>
+          <p class="explanation">
+            A model can only be assigned to one service.
+          </p>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -134,7 +137,7 @@ table th, table td {
                     <span class="name">models</span>
                 </td>
                 <td>
-                  <span class="description">Models to be assigned to a specific service</span>
+                  <span class="description">Models assigned to a specific service</span>
                 </td>
               </tr>
             </tbody>
@@ -163,8 +166,8 @@ X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: text/html
 Cache-Control: no-cache
-X-Request-Id: 4995bdb5-54f4-4e28-b8b8-bb40987e794b
-X-Runtime: 0.011503
+X-Request-Id: 70487ae6-d152-4e1d-a486-f8ec9e4c3466
+X-Runtime: 0.011784
 Content-Length: 0</pre>
             <h4>Status</h4>
             <pre class="response status">422 Unprocessable Entity</pre>

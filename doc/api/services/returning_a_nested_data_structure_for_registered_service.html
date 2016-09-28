@@ -109,8 +109,11 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Returning a nested data structure on previously registered services</h2>
+        <h2>Returning a nested data structure for registered service</h2>
         <h3>POST /services/register</h3>
+          <p class="explanation">
+            A registered service and its models are returned.
+          </p>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -134,7 +137,7 @@ table th, table td {
                     <span class="name">models</span>
                 </td>
                 <td>
-                  <span class="description">Models to be assigned to a specific service</span>
+                  <span class="description">Models assigned to a specific service</span>
                 </td>
               </tr>
             </tbody>
@@ -164,8 +167,8 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 ETag: W/&quot;e88a6074d1e01b6999b8f58e8564a4e0&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 53f4d88d-429d-4ea8-9a74-69ea6d168849
-X-Runtime: 0.023480
+X-Request-Id: b4566be8-e8aa-4cbf-bb08-7feacabdc6bc
+X-Runtime: 0.025651
 Content-Length: 48</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
