@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Models API</title>
+    <title>Services API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Models API</h1>
+      <h1>Services API</h1>
 
       <div class="article">
-        <h2>Listing all models by service</h2>
-        <h3>GET /models</h3>
+        <h2>Returning a nested data structure on registered services</h2>
+        <h3>POST /services/register</h3>
 
 
 
@@ -118,12 +118,15 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Host: example.org
+Content-Type: application/x-www-form-urlencoded
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /models</pre>
+          <pre class="request route highlight">POST /services/register</pre>
 
 
+            <h4>Body</h4>
+            <pre class="request body">url=1&models[][name]=1&models[][name]=2</pre>
 
 
             <h3>Response</h3>
@@ -132,35 +135,25 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;c15b2c42c0e2d704564fd0ef70381a86&quot;
+ETag: W/&quot;e88a6074d1e01b6999b8f58e8564a4e0&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 81b9cba4-3193-47a5-9ffd-ef4659c1487e
-X-Runtime: 0.026077
-Content-Length: 86</pre>
+X-Request-Id: 853aa05a-97f0-4387-b5ca-0d4e49cab40e
+X-Runtime: 0.025817
+Content-Length: 48</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">[
-  {
-    &quot;url&quot;: &quot;1&quot;,
-    &quot;models&quot;: [
-      {
-        &quot;name&quot;: &quot;1&quot;
-      },
-      {
-        &quot;name&quot;: &quot;2&quot;
-      }
-    ]
-  },
-  {
-    &quot;url&quot;: &quot;2&quot;,
-    &quot;models&quot;: [
-      {
-        &quot;name&quot;: &quot;3&quot;
-      }
-    ]
-  }
-]</pre>
+              <pre class="response body">{
+  &quot;url&quot;: &quot;1&quot;,
+  &quot;models&quot;: [
+    {
+      &quot;name&quot;: &quot;1&quot;
+    },
+    {
+      &quot;name&quot;: &quot;2&quot;
+    }
+  ]
+}</pre>
       </div>
     </div>
   </body>
