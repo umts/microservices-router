@@ -10,7 +10,6 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
-
 RSpec.configure do |config|
   config.before :all do
     DatabaseCleaner.clean_with :truncation
@@ -23,5 +22,8 @@ RSpec.configure do |config|
   end
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+  end
+  def status_code(code_symbol)
+    Rack::Utils::SYMBOL_TO_STATUS_CODE.fetch code_symbol
   end
 end

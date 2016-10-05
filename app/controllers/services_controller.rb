@@ -1,11 +1,16 @@
 class ServicesController < ApplicationController
   def register
-    @service = Service.create
-    @service.url = params[:url]
-    @models = params[:models]
-    @models.each{ |m| Model.create(service: @service)}
-    render json: @service, 
-              except: %i(created_at updated_at id),
-              include: :models
+    service = Service.find_or_create_by url: params.require(:url)
+    params.require(:models).each do |model_data|
+      model = Model.find_by name: model_data.require(:name)
+      if model.present?
+        head :unprocessable_entity and return if model.service != service
+      else
+        Model.create(name: model_data.require(:name), service: service)
+      end
+    end
+    render json: service,
+           only: :url,
+           include: { models: { only: :name } }
   end
 end
