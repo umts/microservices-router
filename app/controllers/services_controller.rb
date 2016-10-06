@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+  include MicroservicesRouter
   def register
     service = Service.find_or_create_by url: params.require(:url)
     params.require(:models).each do |model_data|
@@ -12,5 +13,6 @@ class ServicesController < ApplicationController
     render json: service,
            only: :url,
            include: { models: { only: :name } }
+    if service.changed? then MicroservicesRouter.notify_services_of_changes end
   end
 end
