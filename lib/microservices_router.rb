@@ -8,4 +8,5 @@ module ServiceChangeNotifier
         Net::HTTP.post(URI(s.url), 'an error occurred with the request')
       end
     end
+  end
 end
