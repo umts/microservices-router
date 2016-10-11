@@ -13,6 +13,6 @@ class ServicesController < ApplicationController
     render json: service,
            only: :url,
            include: { models: { only: :name } }
-    if service.changed? then MicroservicesRouter.notify_services_of_changes end
+    MicroservicesRouter.notify_services_of_changes if service.changed?
   end
 end
