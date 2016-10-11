@@ -1,5 +1,4 @@
 require 'net/http'
-require 'uri'
 
 module MicroservicesRouter
   def self.notify_services_of_changes
