@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'microservices_router'
 
 resource 'Services' do
+  include ServiceChangeNotifier
   post '/services/register' do
     let(:service_1) { create :service }
     let(:model_1) { create :model, service: service_1 }
