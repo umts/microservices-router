@@ -13,6 +13,6 @@ class ServicesController < ApplicationController
       render json: service,
              only: :url,
              include: { models: { only: :name } }
-      ServiceChangeNotifier.notify_services_of_changes if (service.changed? || service.models.each{|m| m.changed?}.present?)
+      ServiceChangeNotifier.notify_services_of_changes if (service.changed? || service.models.any?(&:changed?))
   end
 end
