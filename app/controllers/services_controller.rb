@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   include ServiceChangeNotifier
     def register
+      count = Service.count
       service = Service.find_or_create_by url: params.require(:url)
       params.require(:models).each do |model_data|
         model = Model.find_by name: model_data.require(:name)
@@ -13,6 +14,6 @@ class ServicesController < ApplicationController
       render json: service,
              only: :url,
              include: { models: { only: :name } }
-      ServiceChangeNotifier.notify_services_of_changes if (service.changed? || service.models.any?(&:changed?))
+      ServiceChangeNotifier.notify_services_of_changes 
   end
 end
