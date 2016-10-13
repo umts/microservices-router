@@ -24,7 +24,7 @@ resource 'Services' do
     end
     example 'Creating and returning a nested data structure' do
       explanation 'A service and its models are created and returned.'
-      service_data = { url: 'PiVTrAck.org',
+      service_data = { url: 'https://www.example.com/abc',
                        models: [{ name: 'amazing model' }] }
       expect { do_request(service_data) }
         .to change { Service.count }
@@ -35,7 +35,7 @@ resource 'Services' do
     end
     example 'Doing nothing for a model with a service' do
       explanation 'A model can only be assigned to one service.'
-      service_data = { url: 'UMassTransit.com',
+      service_data = { url: 'https://www.example.com/bus',
                        models: [{ name: model_1.name }] }
       expect { do_request(service_data) }
         .not_to change { Model.count }
