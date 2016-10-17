@@ -15,6 +15,7 @@ resource 'Services' do
       service_data = { url: service_1.url,
                        models: [{ name: model_1.name },
                                 { name: model_2.name }] }
+      expect(ServiceChangeNotifier).not_to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .not_to change { Service.count }
       expect(status).to be status_code :ok
@@ -26,6 +27,7 @@ resource 'Services' do
       explanation 'A service and its models are created and returned.'
       service_data = { url: 'https://www.example.com/abc',
                        models: [{ name: 'amazing model' }] }
+      expect(ServiceChangeNotifier).to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .to change { Service.count }
         .by 1
@@ -37,6 +39,7 @@ resource 'Services' do
       explanation 'A model can only be assigned to one service.'
       service_data = { url: 'https://www.example.com/bus',
                        models: [{ name: model_1.name }] }
+      expect(ServiceChangeNotifier).not_to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .not_to change { Model.count }
       expect(status).to be status_code :unprocessable_entity
