@@ -45,7 +45,7 @@ resource 'Services' do
       expect(status).to be status_code :unprocessable_entity
       expect(response_body).to be_empty
     end
-    example 'Changing an old service sends a notification' do
+    example 'Updating a registered service sends a notification' do
       service_data = { url: model_1.service.url,
                         models: [{ name: 'hello there' }]}
       expect(ServiceChangeNotifier).to receive :notify_services_of_changes
