@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :service do
-    sequence :url
+    sequence(:url) { |n| "https://www.example.com/#{n}" }
   end
 end

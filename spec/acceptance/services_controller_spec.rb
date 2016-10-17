@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'microservices_router'
 
 resource 'Services' do
+  include ServiceChangeNotifier
   post '/services/register' do
     let(:service_1) { create :service }
     let(:model_1) { create :model, service: service_1 }
@@ -13,6 +15,8 @@ resource 'Services' do
       service_data = { url: service_1.url,
                        models: [{ name: model_1.name },
                                 { name: model_2.name }] }
+      expect_any_instance_of(ServicesController)
+        .not_to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .not_to change { Service.count }
       expect(status).to be status_code :ok
@@ -22,8 +26,10 @@ resource 'Services' do
     end
     example 'Creating and returning a nested data structure' do
       explanation 'A service and its models are created and returned.'
-      service_data = { url: 'PiVTrAck.org',
+      service_data = { url: 'https://www.example.com/abc',
                        models: [{ name: 'amazing model' }] }
+      expect_any_instance_of(ServicesController)
+        .to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .to change { Service.count }
         .by 1
@@ -33,12 +39,22 @@ resource 'Services' do
     end
     example 'Doing nothing for a model with a service' do
       explanation 'A model can only be assigned to one service.'
-      service_data = { url: 'UMassTransit.com',
+      service_data = { url: 'https://www.example.com/bus',
                        models: [{ name: model_1.name }] }
+      expect_any_instance_of(ServicesController)
+        .not_to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .not_to change { Model.count }
       expect(status).to be status_code :unprocessable_entity
       expect(response_body).to be_empty
+    end
+    example 'Updating a registered service sends a notification' do
+      service_data = { url: model_1.service.url,
+                       models: [{ name: 'hello there' }] }
+      expect_any_instance_of(ServicesController)
+        .to receive :notify_services_of_changes
+      expect { do_request(service_data) }
+        .not_to change { Model.count }
     end
   end
 end
