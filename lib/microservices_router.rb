@@ -1,7 +1,7 @@
 require 'net/http'
 
 module ServiceChangeNotifier
-  def self.notify_services_of_changes
+  def notify_services_of_changes
     Service.all.each do |s|
       unless s.url.nil?
         request = Net::HTTP.post_form(URI(s.url), {'services' => Service.all.to_json(include: :models)} )
