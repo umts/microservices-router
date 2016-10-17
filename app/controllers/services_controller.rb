@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
             Model.find(old_name).destroy
           end
         end
-      ServiceChangeNotifier.notify_services_of_changes if changes_made
+      notify_services_of_changes if changes_made
       render json: service,
              only: :url,
              include: { models: { only: :name } }
