@@ -99,7 +99,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
-    mocha (1.2.0)
+    mocha (1.2.1)
       metaclass (~> 0.0.1)
     mustache (1.0.3)
     mysql2 (0.4.4)
