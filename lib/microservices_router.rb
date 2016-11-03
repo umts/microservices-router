@@ -9,7 +9,11 @@ module ServiceChangeNotifier
                                       Service.all.to_json(include: :models))
       if request.nil?
         Net::HTTP.post_form(URI(s.url),
-                            'error' => 'an error occurred with the request')
+                            'error' => 'Request is nil')
+      elsif request == Net::HTTPSuccess
+      else
+        send_mail(status)
+        request.retry
       end
     end
   end
