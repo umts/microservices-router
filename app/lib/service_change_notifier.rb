@@ -1,7 +1,5 @@
 require 'net/http'
 
-raise
-
 module ServiceChangeNotifier
   def notify_services_of_changes
     Service.all.each do |s|
