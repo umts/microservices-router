@@ -5,22 +5,25 @@ class ServicesController < ApplicationController
   def register
     changes_made = false
     service = Service.find_or_create_by url: params.require(:url)
-    service_models = service.models.pluck :name
-    param_models = params.require(:models)
-    param_models.each do |model_data|
-      model = Model.find_by name: model_data.require(:name)
-      if model.present?
-        head :unprocessable_entity and return if model.service != service
-      else
-        Model.create(name: model_data.require(:name), service: service)
-        changes_made = true
+    service_model_names = service.models.pluck :name
+    param_model_names = []
+    if params[:models].present?
+      params[:models].each do |model_data|
+        model_name = model_data.require :name
+        param_model_names << model_name
+        model = Model.find_by name: model_name
+        if model.present?
+          head :unprocessable_entity and return if model.service != service
+        else
+          Model.create(name: model_data.require(:name), service: service)
+          changes_made = true
+        end
       end
-    end
-    param_models = param_models.map { |h| h.fetch(:name) }
-    old_models = service_models - param_models
-    if old_models.present?
-      old_models.each do |old_name|
-        Model.find(old_name).destroy
+      old_model_names = service_model_names - param_model_names
+      if old_model_names.present?
+        old_model_names.each do |old_name|
+          Model.find_by(name: old_name).destroy
+        end
       end
     end
     notify_services_of_changes if changes_made

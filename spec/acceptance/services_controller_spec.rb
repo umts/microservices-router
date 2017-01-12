@@ -7,7 +7,7 @@ resource 'Services' do
     let(:model_1) { create :model, service: service_1 }
     let(:model_2) { create :model, service: service_1 }
     parameter :url, 'Unique identifier for services', required: true
-    parameter :models, 'Models assigned to a specific service', required: true
+    parameter :models, 'Models assigned to a specific service', required: false
 
     example 'Returning a nested data structure for registered service' do
       explanation 'A registered service and its models are returned.'
