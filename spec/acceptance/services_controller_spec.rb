@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'microservices_router'
 
 resource 'Services' do
   include ServiceChangeNotifier
@@ -36,6 +35,13 @@ resource 'Services' do
       body = JSON.parse response_body
       body.deep_symbolize_keys!
       expect(body).to eql service_data
+    end
+    example 'Creating and returning a simple service' do
+      explanation 'A service with no models is still valid.'
+      service_data = { url: 'https://www.example.com' }
+      expect { do_request service_data }
+        .to change(Service, :count).by 1
+      expect(status).to be status_code :ok
     end
     example 'Doing nothing for a model with a service' do
       explanation 'A model can only be assigned to one service.'
