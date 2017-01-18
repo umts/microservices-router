@@ -25,9 +25,9 @@ class ServicesController < ApplicationController
         end
       end
     end
-    notify_services_of_changes if changes_made
     render json: service,
            only: :url,
            include: { models: { only: :name } }
+    notify_services_of_changes if changes_made
   end
 end
