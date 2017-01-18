@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
     service_model_names = service.models.pluck :name
     param_model_names = []
     if params[:models].present?
-      params[:models].each do |model_data|
+      params[:models].split(', ').each do |model_data|
         model_name = model_data.require :name
         param_model_names << model_name
         model = Model.find_by name: model_name
