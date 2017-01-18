@@ -18,9 +18,9 @@ resource 'Services' do
       expect { do_request(service_data) }
         .not_to change { Service.count }
       expect(status).to be status_code :ok
-      body = JSON.parse response_body
-      body.deep_symbolize_keys!
-      expect(body).to eql url: service_1.url, models: [{ name: model_1.name }, { name: model_2.name }]
+      service_data = JSON.parse(response_body).last
+      service_data.deep_symbolize_keys!
+      expect(service_data).to eql url: service_1.url, models: [{ name: model_1.name }, { name: model_2.name }]
     end
     example 'Creating and returning a nested data structure' do
       explanation 'A service and its models are created and returned.'
@@ -31,9 +31,9 @@ resource 'Services' do
       expect { do_request(service_data) }
         .to change { Service.count }
         .by 1
-      body = JSON.parse response_body
-      body.deep_symbolize_keys!
-      expect(body).to eql url: 'https://www.example.com/abc', models: [{ name: 'amazing_model' }]
+      service_data = JSON.parse(response_body).last
+      service_data.deep_symbolize_keys!
+      expect(service_data).to eql url: 'https://www.example.com/abc', models: [{ name: 'amazing_model' }]
     end
     example 'Creating and returning a simple service' do
       explanation 'A service with no models is still valid.'
@@ -60,6 +60,8 @@ resource 'Services' do
         .to receive :notify_services_of_changes
       expect { do_request(service_data) }
         .not_to change { Model.count }
+    end
+    example 'Data about all known services is included' do
     end
   end
 end
