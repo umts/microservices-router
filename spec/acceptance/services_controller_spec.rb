@@ -62,6 +62,13 @@ resource 'Services' do
         .not_to change { Model.count }
     end
     example 'Data about all known services is included' do
+      other_service = create :service
+      other_model = create :model, service: other_service
+      service_data = { url: service_1.url, models: "#{model_1.name}, #{model_2.name}" }
+      do_request(service_data)
+      services = JSON.parse(response_body).map(&:deep_symbolize_keys)
+      expect(services).to include url: other_service.url, models: [{ name: other_model.name }]
+      expect(services).to include url: service_1.url, models: [{ name: model_1.name}, { name: model_2.name }]
     end
   end
 end
