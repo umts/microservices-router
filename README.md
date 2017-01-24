@@ -10,12 +10,12 @@ Then bundle the gem:
 
     bundle install
 
-To access the full syntax guidelines for writing specs, visit the [rspec api documentation](https://github.com/zipmark/rspec_api_documentation). 
+To access the full syntax guidelines for writing specs, read the [rspec api documentation](https://github.com/zipmark/rspec_api_documentation).
 
 Use the command below to generate the docs. Note that this command will write over the previous docs:
 
     rails docs:generate
 
-To view the results, run:
+Run this command to view the results:
 
     open doc/api/index.html
