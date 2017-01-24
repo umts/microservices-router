@@ -12,7 +12,7 @@ module ServiceChangeNotifier
                             'error' => 'Request is nil')
       elsif request == Net::HTTPSuccess
       else
-        send_mail(status)
+        send_mail(s, status)
         request.retry
       end
     end
