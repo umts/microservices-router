@@ -109,8 +109,11 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Changing an old service sends a notification</h2>
+        <h2>Creating and returning a simple service</h2>
         <h3>POST /services/register</h3>
+          <p class="explanation">
+            A service with no models is still valid.
+          </p>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -130,7 +133,7 @@ table th, table td {
                 </td>
               </tr>
               <tr>
-                <td class="required">
+                <td>
                     <span class="name">models</span>
                 </td>
                 <td>
@@ -153,7 +156,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F3&models[][name]=hello+there</pre>
+            <pre class="request body">url=https%3A%2F%2Fwww.example.com</pre>
 
 
             <h3>Response</h3>
@@ -162,25 +165,41 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;ab7f7c62e6657e4b65ea93d5e613fffa&quot;
+ETag: W/&quot;1ff7c80caadbd5f184d834b1b1fd28e5&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 6f36fcd5-e786-4f94-9b0e-2fc7f49f46b1
-X-Runtime: 0.014091
-Content-Length: 82</pre>
+X-Request-Id: 0efd5593-cef9-444b-9174-a30156ba51fd
+X-Runtime: 0.013493
+Content-Length: 206</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{
-  &quot;url&quot;: &quot;https://www.example.com/3&quot;,
-  &quot;models&quot;: [
-    {
-      &quot;name&quot;: &quot;4&quot;
-    },
-    {
-      &quot;name&quot;: &quot;hello there&quot;
-    }
-  ]
-}</pre>
+              <pre class="response body">[
+  {
+    &quot;url&quot;: &quot;https://www.example.com/1&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;Model 1&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Model 2&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/abc&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;amazing_model&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com&quot;,
+    &quot;models&quot;: [
+
+    ]
+  }
+]</pre>
       </div>
     </div>
   </body>
