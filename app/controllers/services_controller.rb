@@ -12,6 +12,7 @@ class ServicesController < ApplicationController
       params[:models].split(', ').each do |model_name|
         param_model_names << model_name
         model = Model.find_by name: model_name
+        binding.pry
         if model.present?
           head :unprocessable_entity and return if model.service != service
         else
@@ -27,9 +28,9 @@ class ServicesController < ApplicationController
         end
       end
     end
+    notify_services_of_changes(changed_service)
     render json: Service.all,
            only: :url,
            include: { models: { only: :name } }
-    notify_services_of_changes(changed_service) if changes_made
   end
 end

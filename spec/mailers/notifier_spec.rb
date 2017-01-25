@@ -1,25 +1,34 @@
 require 'rails_helper'
 
-resource 'NotifierMailer' do
-  example 'Returning a nested data structure for registered service' do
-    email = NotifierMailer.send_mail('404')
-    expect(email.body).to include 'status code: 404.'
+describe 'NotifierMailer' do
+  describe 'send_mail' do
+    it 'Correctly reports the status code in the email body' do
+      email = NotifierMailer.send_mail('404')
+      expect(email.body).to include 'status code: 404.'
+    end
   end
 end
 
-resource 'ServiceChangeNotifier' do
-  # include ServiceChangeNotifier
-  post '/services/register' do
+describe 'ServiceChangeNotifier' do
+  include ServiceChangeNotifier
+  describe 'notify_services_of_changes' do
     let(:service_1) { create :service }
-    let(:model_2) { create :model, service: service_1 }
-    parameter :url, 'Unique identifier for services', required: true
-    parameter :models, 'Models assigned to a specific service', required: false
+    let(:model_1) { create :model, service: service_1 }
 
-    example 'Services are notified when a change is triggered' do
-      let(:model_1) { create :model, service: service_1 }
-      service_data = { url: 'https://www.example.com/abc', models: 'amazing_model' }
-      expect(Net::HTTP).to receive(:post_form).with(URI(service_1.url), services: {  }) 
-      do_request(service_data)
+    it 'Notifies the things' do
+      service_2 = create :service
+      expected_params = [
+        { url: service_2.url,
+          models: []
+        },
+        { url: service_1.url,
+          models: [{ name: model_1.name }]
+          }
+        ].to_json
+      expect(Net::HTTP).to receive(:post_form)
+        .with(URI(service_1.url), 'services' => expected_params)
+        .and_return double(status: 200)
+      notify_services_of_changes(service_2)
     end
     # example 'Services without URLs are not notified of service changes' do
     #   service_no_url = create :service, url: nil
