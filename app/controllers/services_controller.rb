@@ -3,7 +3,6 @@ class ServicesController < ApplicationController
   include ServiceChangeNotifier
 
   def register
-    changes_made = false
     service = Service.find_or_create_by url: params.require(:url)
     service_model_names = service.models.pluck :name
     param_model_names = []
