@@ -133,7 +133,7 @@ table th, table td {
                 </td>
               </tr>
               <tr>
-                <td class="required">
+                <td>
                     <span class="name">models</span>
                 </td>
                 <td>
@@ -156,7 +156,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F1&models[][name]=1&models[][name]=2</pre>
+            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F1&models=Model+1%2C+Model+2</pre>
 
 
             <h3>Response</h3>
@@ -165,25 +165,27 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;9c2fe0d75efca239d3c050faeb78dedc&quot;
+ETag: W/&quot;2a4d71b049f3683967fd527075d2a666&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 1c32869d-0fb5-449b-8ada-2bdc9dd99bd0
-X-Runtime: 0.021985
-Content-Length: 72</pre>
+X-Request-Id: ac6b3399-5d87-4b05-aba1-8092623d57d8
+X-Runtime: 0.017155
+Content-Length: 86</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{
-  &quot;url&quot;: &quot;https://www.example.com/1&quot;,
-  &quot;models&quot;: [
-    {
-      &quot;name&quot;: &quot;1&quot;
-    },
-    {
-      &quot;name&quot;: &quot;2&quot;
-    }
-  ]
-}</pre>
+              <pre class="response body">[
+  {
+    &quot;url&quot;: &quot;https://www.example.com/1&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;Model 1&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Model 2&quot;
+      }
+    ]
+  }
+]</pre>
       </div>
     </div>
   </body>
