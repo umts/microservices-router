@@ -15,7 +15,7 @@ describe 'ServiceChangeNotifier' do
     let(:service_1) { create :service }
     let(:model_1) { create :model, service: service_1 }
 
-    it 'Notifies the things' do
+    it 'Notifies all services with a list of all services/models' do
       service_2 = create :service
       expected_params = [
         { url: service_2.url,
@@ -27,7 +27,13 @@ describe 'ServiceChangeNotifier' do
         ].to_json
       expect(Net::HTTP).to receive(:post_form)
         .with(URI(service_1.url), 'services' => expected_params)
-        .and_return double(status: 200)
+        .and_return Net::HTTPResponse.new('1.0', '200', '')
+      notify_services_of_changes(service_2)
+    end
+    it 'Does not notify the service that caused the changes' do
+      service_2 = create :service
+      expect(Net::HTTP).not_to receive(:post_form)
+        .with(URI(service_2.url), anything)
       notify_services_of_changes(service_2)
     end
     # example 'Services without URLs are not notified of service changes' do
