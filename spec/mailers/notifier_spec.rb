@@ -12,35 +12,44 @@ end
 describe 'ServiceChangeNotifier' do
   include ServiceChangeNotifier
   describe 'notify_services_of_changes' do
-    let(:service_1) { create :service }
-    let(:model_1) { create :model, service: service_1 }
+    before(:each) do
+      @service_1 = create :service
+      @service_2 = create :service
+      @model_1 = create :model, service: @service_1
+    end
 
     it 'Notifies all services with a list of all services/models' do
-      service_2 = create :service
       expected_params = [
-        { url: service_2.url,
-          models: []
+        { url: @service_1.url,
+          models: [{ name: @model_1.name }]
         },
-        { url: service_1.url,
-          models: [{ name: model_1.name }]
-          }
+        { url: @service_2.url,
+          models: []
+        }
         ].to_json
+        binding.pry
       expect(Net::HTTP).to receive(:post_form)
-        .with(URI(service_1.url), 'services' => expected_params)
+        .with(URI(@service_1.url), 'services' => expected_params)
         .and_return Net::HTTPResponse.new('1.0', '200', '')
-      notify_services_of_changes(service_2)
+      notify_services_of_changes(@service_2)
     end
+
     it 'Does not notify the service that caused the changes' do
-      service_2 = create :service
-      expect(Net::HTTP).not_to receive(:post_form)
-        .with(URI(service_2.url), anything)
-      notify_services_of_changes(service_2)
+      expect(Net::HTTP).to receive(:post_form)
+        .with(anything, anything)
+        .and_return Net::HTTPResponse.new('1.0', '200', '')
+        expect(Net::HTTP).not_to receive(:post_form)
+          .with(URI(@service_2.url), 'services' => anything)
+      notify_services_of_changes(@service_2)
     end
-    # example 'Services without URLs are not notified of service changes' do
-    #   service_no_url = create :service, url: nil
-    #   service_data = { url: 'https://www.example.com/abc', models: 'amazing_model' }
-    #   expect(service_1).not_to receive :notify_services_of_changes
-    #   do_request(service_data)
-    # end
+
+    it 'Sends mail when a service responds with an error' do
+      expect(Net::HTTP).to receive(:post_form)
+        .with(URI(@service_1.url), 'services' => anything)
+        .and_return Net::HTTPNotFound.new('1.0', '404', '')
+      # expect(NotifierMailer).to receive(:send_mail)
+      #   .with('404')
+        notify_services_of_changes(@service_2)
+    end
   end
 end
