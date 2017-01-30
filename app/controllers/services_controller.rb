@@ -23,6 +23,7 @@ class ServicesController < ApplicationController
         old_model_names.each do |old_name|
           Model.find_by(name: old_name).destroy
         end
+        changes_made = true
       end
     end
     render json: Service.all,
