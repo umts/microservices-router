@@ -12,7 +12,7 @@ class ServicesController < ApplicationController
       params[:models].split(', ').each do |model_name|
         param_model_names << model_name
         model = Model.find_by name: model_name
-        binding.pry
+        # binding.pry
         if model.present?
           head :unprocessable_entity and return if model.service != service
         else

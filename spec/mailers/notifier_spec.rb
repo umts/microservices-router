@@ -27,7 +27,6 @@ describe 'ServiceChangeNotifier' do
           models: []
         }
         ].to_json
-        binding.pry
       expect(Net::HTTP).to receive(:post_form)
         .with(URI(@service_1.url), 'services' => expected_params)
         .and_return Net::HTTPResponse.new('1.0', '200', '')
@@ -40,6 +39,7 @@ describe 'ServiceChangeNotifier' do
         .and_return Net::HTTPResponse.new('1.0', '200', '')
         expect(Net::HTTP).not_to receive(:post_form)
           .with(URI(@service_2.url), 'services' => anything)
+        binding.pry
       notify_services_of_changes(@service_2)
     end
 
