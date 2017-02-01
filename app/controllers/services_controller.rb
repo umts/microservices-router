@@ -20,6 +20,7 @@ class ServicesController < ApplicationController
       end
       old_model_names = service_model_names - param_model_names
       if old_model_names.present?
+        changes_made = true
         old_model_names.each do |old_name|
           Model.find_by(name: old_name).destroy
         end

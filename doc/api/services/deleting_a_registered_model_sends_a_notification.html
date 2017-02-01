@@ -109,11 +109,8 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Returning a nested data structure for registered service</h2>
+        <h2>Deleting a registered model sends a notification</h2>
         <h3>POST /services/register</h3>
-          <p class="explanation">
-            A registered service and its models are returned.
-          </p>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -156,7 +153,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F1&models=Model+1%2C+Model+2</pre>
+            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F4&models=model+name</pre>
 
 
             <h3>Response</h3>
@@ -165,11 +162,11 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;2a4d71b049f3683967fd527075d2a666&quot;
+ETag: W/&quot;b7b3b4afab59737922fe9f83ef7f4b5c&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: c8dfe74f-60c5-4b83-8d88-0fc3c59392cc
-X-Runtime: 0.023455
-Content-Length: 86</pre>
+X-Request-Id: ee259f12-8c34-4be7-9d2c-9f08e1da0cd1
+X-Runtime: 0.030721
+Content-Length: 461</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
@@ -182,6 +179,50 @@ Content-Length: 86</pre>
       },
       {
         &quot;name&quot;: &quot;Model 2&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/abc&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;amazing_model&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com&quot;,
+    &quot;models&quot;: [
+
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/2&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;Model 3&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/bus&quot;,
+    &quot;models&quot;: [
+
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/3&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;hello_there&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/4&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;model name&quot;
       }
     ]
   }
