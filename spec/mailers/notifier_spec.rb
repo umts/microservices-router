@@ -39,7 +39,6 @@ describe 'ServiceChangeNotifier' do
         .and_return Net::HTTPResponse.new('1.0', '200', '')
         expect(Net::HTTP).not_to receive(:post_form)
           .with(URI(@service_2.url), 'services' => anything)
-        binding.pry
       notify_services_of_changes(@service_2)
     end
 
