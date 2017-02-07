@@ -17,7 +17,7 @@ class ServicesController < ApplicationController
         else
           Model.create(name: model_name, service: service)
           changes_made = true
-          changed_service = service.id
+          changed_service = service
         end
       end
       old_model_names = service_model_names - param_model_names
