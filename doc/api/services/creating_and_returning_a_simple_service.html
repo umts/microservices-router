@@ -109,10 +109,10 @@ table th, table td {
       <h1>Services API</h1>
 
       <div class="article">
-        <h2>Returning a nested data structure for registered service</h2>
+        <h2>Creating and returning a simple service</h2>
         <h3>POST /services/register</h3>
           <p class="explanation">
-            A registered service and its models are returned.
+            A service with no models is still valid.
           </p>
 
           <h3>Parameters</h3>
@@ -156,7 +156,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">url=https%3A%2F%2Fwww.example.com%2F1&models=Model+1%2C+Model+2</pre>
+            <pre class="request body">url=https%3A%2F%2Fwww.example.com</pre>
 
 
             <h3>Response</h3>
@@ -165,11 +165,11 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;2a4d71b049f3683967fd527075d2a666&quot;
+ETag: W/&quot;1ff7c80caadbd5f184d834b1b1fd28e5&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: c8dfe74f-60c5-4b83-8d88-0fc3c59392cc
-X-Runtime: 0.023455
-Content-Length: 86</pre>
+X-Request-Id: c3393e4b-b69b-416f-88c0-6a175af69646
+X-Runtime: 0.013800
+Content-Length: 206</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
@@ -183,6 +183,20 @@ Content-Length: 86</pre>
       {
         &quot;name&quot;: &quot;Model 2&quot;
       }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com/abc&quot;,
+    &quot;models&quot;: [
+      {
+        &quot;name&quot;: &quot;amazing_model&quot;
+      }
+    ]
+  },
+  {
+    &quot;url&quot;: &quot;https://www.example.com&quot;,
+    &quot;models&quot;: [
+
     ]
   }
 ]</pre>

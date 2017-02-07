@@ -9,7 +9,7 @@ module ServiceChangeNotifier
                                       Service.all.to_json(only: :url,
                                       include: { models: { only: :name }}))
       if !response.is_a? Net::HTTPSuccess
-        NotifierMailer.send_mail(response.code)
+        NotifierMailer.send_mail(s.url, response.code)
       end
     end
   end

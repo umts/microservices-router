@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe 'NotifierMailer' do
-  describe 'send_mail' do
-    it 'Correctly reports the status code in the email body' do
-      email = NotifierMailer.send_mail('404')
-      expect(email.body).to include 'status code: 404.'
-    end
+resource 'NotifierMailer' do
+  let(:service_1) { create :service }
+  example 'Returning a nested data structure for registered service' do
+    email = NotifierMailer.send_mail(service_1.url, '404')
+    expect(email.body).to include 'status code 404.'
+    expect(email.body).to include "service #{service_1.url}"
   end
 end
 
