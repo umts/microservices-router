@@ -46,8 +46,6 @@ describe 'ServiceChangeNotifier' do
       expect(Net::HTTP).to receive(:post_form)
         .with(URI(@service_1.url), 'services' => anything)
         .and_return Net::HTTPNotFound.new('1.0', '404', '')
-      # expect(NotifierMailer).to receive(:send_mail)
-      #   .with('404')
         notify_services_of_changes(@service_2)
     end
   end
