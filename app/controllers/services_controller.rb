@@ -4,7 +4,6 @@ class ServicesController < ApplicationController
 
   def register
     changes_made = false
-    changed_service = nil
     service = Service.find_or_create_by url: params.require(:url)
     service_model_names = service.models.pluck :name
     param_model_names = []
@@ -17,7 +16,6 @@ class ServicesController < ApplicationController
         else
           Model.create(name: model_name, service: service)
           changes_made = true
-          changed_service = service
         end
       end
       old_model_names = service_model_names - param_model_names
@@ -28,7 +26,7 @@ class ServicesController < ApplicationController
         end
       end
     end
-    notify_services_of_changes(changed_service) if changes_made
+    notify_services_of_changes(service) if changes_made
     render json: Service.all,
            only: :url,
            include: { models: { only: :name } }

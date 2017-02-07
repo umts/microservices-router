@@ -25,6 +25,8 @@ describe 'ServiceChangeNotifier' do
           models: []
         }
         ].to_json
+      # We want a response that is served (for no particular reason)
+      # using HTTP 1.0, contains a status code of 200, and has no message.
       expect(Net::HTTP).to receive(:post_form)
         .with(URI(service_1.url), 'services' => expected_params)
         .and_return Net::HTTPResponse.new('1.0', '200', '')
