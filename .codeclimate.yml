@@ -12,7 +12,6 @@ engines:
     enabled: true
   rubocop:
     enabled: true
-    config: .rubocop-no-umts-cops.yml
 exclude_paths:
 - coverage/**/*
 - db/**/*
