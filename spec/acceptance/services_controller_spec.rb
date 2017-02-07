@@ -61,6 +61,14 @@ resource 'Services' do
       expect { do_request(service_data) }
         .not_to change { Model.count }
     end
+    example 'Deleting a registered model sends a notification' do
+      service_data = { url: service_1.url,
+                       models: 'model name' }
+      expect_any_instance_of(ServicesController)
+        .to receive :notify_services_of_changes
+      do_request(service_data)
+      expect(service_1.models.first).to eql Model.find_by(name: 'model name')
+    end
     example 'Data about all known services is included' do
       other_service = create :service
       other_model = create :model, service: other_service
