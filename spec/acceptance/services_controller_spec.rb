@@ -20,7 +20,9 @@ resource 'Services' do
       expect(status).to be status_code :ok
       service_data = JSON.parse(response_body).last
       service_data.deep_symbolize_keys!
-      expect(service_data).to eql url: service_1.url, models: [{ name: model_1.name }, { name: model_2.name }]
+      expect(service_data).to eql url: service_1.url,
+                                  models: [{ name: model_1.name },
+                                           { name: model_2.name }]
     end
     example 'Creating and returning a nested data structure' do
       explanation 'A service and its models are created and returned.'
@@ -33,7 +35,8 @@ resource 'Services' do
         .by 1
       service_data = JSON.parse(response_body).last
       service_data.deep_symbolize_keys!
-      expect(service_data).to eql url: 'https://www.example.com/abc', models: [{ name: 'amazing_model' }]
+      expect(service_data).to eql url: 'https://www.example.com/abc',
+                                  models: [{ name: 'amazing_model' }]
     end
     example 'Creating and returning a simple service' do
       explanation 'A service with no models is still valid.'
@@ -72,11 +75,15 @@ resource 'Services' do
     example 'Data about all known services is included' do
       other_service = create :service
       other_model = create :model, service: other_service
-      service_data = { url: service_1.url, models: "#{model_1.name}, #{model_2.name}" }
+      service_data = { url: service_1.url,
+                       models: "#{model_1.name}, #{model_2.name}" }
       do_request(service_data)
       services = JSON.parse(response_body).map(&:deep_symbolize_keys)
-      expect(services).to include url: other_service.url, models: [{ name: other_model.name }]
-      expect(services).to include url: service_1.url, models: [{ name: model_1.name}, { name: model_2.name }]
+      expect(services).to include url: other_service.url,
+                                  models: [{ name: other_model.name }]
+      expect(services).to include url: service_1.url,
+                                  models: [{ name: model_1.name },
+                                           { name: model_2.name }]
     end
   end
 end

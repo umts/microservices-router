@@ -23,7 +23,7 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
-  
+
   def status_code(code_symbol)
     Rack::Utils::SYMBOL_TO_STATUS_CODE.fetch code_symbol
   end

@@ -17,13 +17,14 @@ describe 'ServiceChangeNotifier' do
     let!(:model_1) { create :model, service: service_1 }
 
     it 'Notifies all services with a list of all services/models' do
-      expected_params = [
-        { url: service_1.url,
-          models: [{ name: model_1.name }]
-        },
-        { url: service_2.url,
-          models: []
-        }
+      expected_params =
+        [
+          { url: service_1.url,
+            models: [{ name: model_1.name }]
+          },
+          { url: service_2.url,
+            models: []
+          }
         ].to_json
       # We want a response that is served (for no particular reason)
       # using HTTP 1.0, contains a status code of 200, and has no message.
@@ -37,8 +38,8 @@ describe 'ServiceChangeNotifier' do
       expect(Net::HTTP).to receive(:post_form)
         .with(anything, anything)
         .and_return Net::HTTPResponse.new('1.0', '200', '')
-        expect(Net::HTTP).not_to receive(:post_form)
-          .with(URI(service_2.url), 'services' => anything)
+      expect(Net::HTTP).not_to receive(:post_form)
+        .with(URI(service_2.url), 'services' => anything)
       notify_services_of_changes(service_2)
     end
 

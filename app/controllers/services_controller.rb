@@ -1,5 +1,4 @@
 class ServicesController < ApplicationController
-
   include ServiceChangeNotifier
 
   def register
