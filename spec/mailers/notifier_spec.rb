@@ -20,11 +20,9 @@ describe 'ServiceChangeNotifier' do
       expected_params =
         [
           { url: service_1.url,
-            models: [{ name: model_1.name }]
-          },
+            models: [{ name: model_1.name }] },
           { url: service_2.url,
-            models: []
-          }
+            models: [] }
         ].to_json
       # We want a response that is served (for no particular reason)
       # using HTTP 1.0, contains a status code of 200, and has no message.
