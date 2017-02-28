@@ -1,5 +1,4 @@
 class ServicesController < ApplicationController
-
   include ServiceChangeNotifier
 
   def register
@@ -26,9 +25,9 @@ class ServicesController < ApplicationController
         end
       end
     end
+    notify_services_of_changes(service) if changes_made
     render json: Service.all,
            only: :url,
            include: { models: { only: :name } }
-    notify_services_of_changes if changes_made
   end
 end
